@@ -1,0 +1,11 @@
+## 알고리즘 풀이 기본 템플릿
+
+```c++
+#include <stdio.h>
+
+main() {
+    // blah blah
+    scanf();
+    printf();
+}
+```

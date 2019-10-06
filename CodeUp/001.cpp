@@ -2,6 +2,6 @@
 
 int main()
 {
-  printf("문장");
+  printf("Hello");
   return 0;
 }

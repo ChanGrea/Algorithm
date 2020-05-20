@@ -1,6 +1,7 @@
 package BOJ;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class BOJ11404 {
     private static int N, M;
@@ -16,14 +17,25 @@ public class BOJ11404 {
 
         for(int i = 0; i < M; i++) {
             String[] input = br.readLine().split(" ");
-            map[Integer.parseInt(input[0])][Integer.parseInt(input[1])] = Integer.parseInt(input[2]);
+            int s = Integer.parseInt(input[0]);
+            int d = Integer.parseInt(input[1]);
+            int c = Integer.parseInt(input[2]);
+
+            if(map[s][d] == 0) {
+                map[s][d] = c;
+            } else {
+                map[s][d] = Math.min(map[s][d], c);
+            }
         }
 
         floydWarshall();
 
         for(int i = 1; i <= N; i++) {
             for(int j = 1; j <= N; j++) {
-                bw.write(map[i][j] + " ");
+                if(map[i][j] == 999999)
+                    bw.write(0 + " ");
+                else
+                    bw.write(map[i][j] + " ");
             }
             bw.write("\n");
         }
@@ -37,15 +49,18 @@ public class BOJ11404 {
     private static void floydWarshall() {
         for(int k = 1; k <= N; k++) {
             for(int i = 1; i <= N; i++) {
+                if(map[i][k] == 0)
+                    continue;
+
                 for(int j = 1; j <= N; j++) {
-                    if(i != j && map[i][k] != 0 && map[k][j] != 0) {
-                        if(map[i][j] == 0)
-                            map[i][j] = map[i][k] + map[k][j];
-                        if(map[i][k] + map[k][j] < map[i][j])
-                            map[i][j] = map [i][k] + map[k][j];
-                    }
+                    if(map[k][j] == 0 || i == j)
+                        continue;
+
+                    if(map[i][j] == 0 || map[i][k] + map[k][j] < map[i][j])
+                        map[i][j] = map [i][k] + map[k][j];
                 }
             }
         }
     }
 }
+

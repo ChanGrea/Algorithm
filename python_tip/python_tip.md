@@ -259,3 +259,112 @@ import sys
 sys.stdin.readline().rstrip()
 ```
 
+
+
+## 주요 라이브러리의 문법과 유의점
+
+### 내장 함수
+
+#### sum
+
+```python
+result = sum([1, 2, 3, 4, 5])
+print(result)    # 15
+```
+
+- **iterable 객체**가 입력으로 주어졌을 때 합계
+
+
+
+#### min
+
+```python
+result = min(7, 3, 5, 2)
+print(result)    # 2
+```
+
+
+
+#### max
+
+```python
+result = max(7, 3, 5, 2)
+print(result)    # 7
+```
+
+
+
+#### eval
+
+```python
+result = eval("(3 + 5) * 7")
+print(result)
+```
+
+- 수식을 계산한 결과를 반한
+
+
+
+#### sorted
+
+```python
+result = sorted([9, 1, 8, 5, 4])
+print(result)
+result = sorted([9, 1, 8, 5, 4], reverse = True)
+print(result)
+```
+
+```
+[1, 4, 5, 8, 9]
+[9, 8, 5, 4, 1]
+```
+
+- 특정한 기준에 따라서 정렬 가능
+
+```python
+result = sorted([('홍길동', 35), ('이순신', 75), ('아무개', 50)], key = lambda x: x[1], reverse = True)
+print(result)
+```
+
+```
+[('이순신', 75), ('아무개', 50), ('홍길동', 35)]
+```
+
+
+
+### itertools
+
+#### permutations
+
+```python
+from itertools import permutations
+
+data = ['A', 'B', 'C']    # 데이터 준비
+result = list(permutations(data, 3))    # 모든 순열 구하기
+
+print(result)
+```
+
+```
+[('A', 'B', 'C'), ('A', 'C', 'B'), ('B', 'A', 'C'), ('B', 'C', 'A'), ('C', 'A', 'B'), ('C', 'B', 'A')]
+```
+
+
+
+#### combinations
+
+```python
+from itertools import combinations
+
+data = ['A', 'B', 'C']    # 데이터 준비
+result = list(combinations(data, 2))    # 2개를 뽑는 모든 조합 구하기
+
+print(result)
+```
+
+```
+[('A', 'B'), ('A', 'C'), ('B', 'C')]
+```
+
+
+

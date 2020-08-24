@@ -336,6 +336,8 @@ print(result)
 
 #### permutations
 
+- 리스트와 같은 iterable 객체에서 r개의 데이터를 뽑아 일렬로 나열하는 모든 경우(순열)
+
 ```python
 from itertools import permutations
 
@@ -353,6 +355,8 @@ print(result)
 
 #### combinations
 
+- 리스트와 같은 iterable 객체에서 r개의 데이터를 뽑아 순서를 고려하지 않고 나열하는 모든 경우(조합)
+
 ```python
 from itertools import combinations
 
@@ -367,4 +371,205 @@ print(result)
 ```
 
 
+
+#### product
+
+- permutations와 같이 리스트와 같은 iterable 객체에서 r개의 데이터를 뽑아 일렬로 나열하는 모든 경우(순열)
+- **중복을 허용**
+
+```python
+from itertools import product
+
+data = ['A', 'B', 'C']		# 데이터 준비
+result = list(product(data, repeat=2))		# 2개를 뽑는 모든 순열 구하기(중복 허용)
+
+print(result)
+```
+
+```
+[('A', 'A'), ('A', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'B'), ('B', 'C'), ('C', 'A'), ('C', 'B'), ('C', 'C')]
+```
+
+
+
+#### combinations_with_replacement
+
+- combinations와 같이 리스트와 같은 iterable 객체에서 r개의 데이터를 뽑아 순서를 고려하지 않고 나열하는 모든 경우(조합)
+- **중복 허용**
+
+```python
+from itertools import combinations_with_replacement
+
+data = ['A', 'B', 'C']		# 데이터 준비
+result = list(combinations_with_replacement(data, 2))		# 2개를 뽑는 모든 조합 구하기(중복 허용)
+print(result)
+```
+
+```
+[('A', 'A'), ('A', 'B'), ('A', 'C'), ('B', 'B'), ('B', 'C'), ('C', 'C')]
+```
+
+
+
+### heapq
+
+- 다익스트라 최단 경로 알고리즘
+
+- 우선순위 큐 기능
+
+- PriorityQueue 라이브러리보다 빠르다.
+
+- 원소 삽입 :arrow_right: heapq.heappush()
+
+  원소 꺼낼 때 :arrow_right: heapq.heappop()
+
+```python
+import heapq
+
+
+def heapsort(iterable):
+    h = []
+    result = []
+    # 모든 원소를 차례대로 힙에 삽입
+    for value in iterable:
+        heapq.heappush(h, value)
+    # 힙에 삽입된 모든 원소를 차례
+    for i in range(len(h)):
+        result.append(heapq.heappop(h))
+    return result
+
+
+result = heapsort([1, 3, 5, 7, 9, 2, 4, 6, 8, 0])
+print(result)
+
+```
+
+```
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+
+
+### bisect
+
+- 이진 탐색을 쉽게 구현하기 위한 라이브러리
+- '정렬된 배열'에서 특정한 원소를 찾아야 할 때 매우 효과적
+- bisect_left(), bisect_right()
+
+```python
+from bisect import bisect_left, bisect_right
+
+a = [1, 2, 4, 4, 8]
+x = 4
+
+print(bisect_left(a, x))
+print(bisect_right(a, x))
+```
+
+- bisect_left(a, x)
+  - 정렬된 순서를 유지하면서 리스트 a에 데이터 x를 삽입할 가장 왼쪽 인덱스를 찾는 메서드
+- bisect_right(a, x)
+  - 정렬된 순서를 유지하도록 리스트 a에 데이터 x를 삽입할 가장 오른쪽 인덱스를 찾는 메서드
+
+
+
+### collections
+
+#### deque
+
+- 파이썬에서는 deque를 사용해 큐를 구현
+- 리스트와 비교했을 때, 앞쪽에 있는 데이터를 삭제하거나 추가할 때 deque가 더 빠르다. (O(1))
+- 인덱싱, 슬라이싱 등의 기능은 사용할 수 없다.
+- 스택, 큐 자료구조의 대용
+
+```python
+from collections import deque
+
+data = deque([2, 3, 4])
+data.appendleft(1)
+data.append(5)
+
+print(data)
+print(list(data))		# 리스트 자료형으로 변환
+```
+
+```
+deque([1, 2, 3, 4, 5])
+[1, 2, 3, 4, 5]
+```
+
+
+
+#### Counter
+
+- 등장 횟수를 세는 기능
+- 리스트와 같은 iterable 객체가 주어졌을 때, 해당 객체 내부의 원소가 몇 번씩 등장했는지를 알려준다.
+
+```python
+from collections import Counter
+
+counter = Counter(['red', 'blue', 'red', 'green', 'blue', 'blue'])
+
+print(counter['blue'])  # 'blue'가 등장한 횟수 출력
+print(counter['green'])  # 'green'이 등장한 횟수 출력
+print(dict(counter))  # 사전 자료형으로 변환
+```
+
+```
+3
+1
+{'red': 2, 'blue': 3, 'green': 1}
+```
+
+
+
+### math
+
+#### factorial
+
+- 팩토리얼
+
+```python
+import math
+
+print(math.factorial(5))	# 5 팩토리얼을 출력
+```
+
+
+
+#### sqrt
+
+- 제곱근
+
+```python
+import math
+
+print(math.sqrt(7))	# 7의 제곱근을 출력
+```
+
+
+
+#### gcd
+
+- 최대 공약수
+
+```python
+import math
+
+print(math.gcd(21, 14))
+```
+
+
+
+#### pi, e
+
+- 파이(pi)
+- 자연상수(e)
+
+```python
+import math
+
+print(math.pi)	# 파이(pi) 출력
+print(math.e)	# 자연상수 e 출력
+```
 

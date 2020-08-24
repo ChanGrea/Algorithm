@@ -252,12 +252,60 @@ n, m, k = map(int, input().split())
 
 
 
+### :heavy_plus_sign: 문자열과 숫자 입력 받기
+
+```python
+s, k = raw_input().split()		# 입력을 모두 문자열로 입력받는다.
+k = int(k)		# 문자열을 숫자로 변환해준다.
+```
+
+- raw_input()을 통해 숫자, 문자열 모두 일단 문자열로 입력받음
+  - input()은 숫자를 입력받는 메소드
+- 숫자일 경우 int()를 통해 숫자로 변환
+
+
+
 ### 한 줄 입력 받기
 
 ```python
 import sys
 sys.stdin.readline().rstrip()
 ```
+
+
+
+### 출력 관련
+
+#### :heavy_check_mark: 문자열 concat 방법(1)  - (추천)
+
+```python
+def method1():
+  str_list = []
+  for num in xrange(loop_count):
+    str_list.append(`num`)
+  return ''.join(str_list)
+```
+
+#### 문자열 concat 방법(2)
+
+```python
+def method2():
+  from cStringIO import StringIO
+  file_str = StringIO()
+  for num in xrange(loop_count):
+    file_str.write(`num`)
+
+  return file_str.getvalue()
+```
+
+#### 문자열 concat 방법(3)
+
+```python
+def method3():
+  return ''.join([`num` for num in xrange(loop_count)])
+```
+
+
 
 
 
